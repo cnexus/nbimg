@@ -4,7 +4,7 @@ CC?=gcc
 CFLAGS=-Wall -Wextra -Wwrite-strings -O -g 
 INSTALL = /usr/bin/install -c
 INSTALLDATA = /usr/bin/install -c -m 644
-PROGNAME = nbimg
+PROGNAME = nbsize
 
 srcdir = .
 prefix = $(DESTDIR)
@@ -14,7 +14,7 @@ mandir = $(prefix)/usr/share/man
 
 all: nbimg win32
 
-nbimg: nbimg.c
+nbsize: nbsize.c
 	$(CC) $< $(CFLAGS) -o $@
 
 win32:

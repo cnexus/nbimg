@@ -51,34 +51,34 @@ int bufferedReadWrite(FILE *input, FILE *output, unsigned long length)
 }
 
 
-static unsigned char bmphead1[18] = {
-	0x42, 0x4d, 		/* signature */
-	0x36, 0x84, 0x03, 0x00, /* size of BMP file in bytes (unreliable) */
-	0x00, 0x00, 0x00, 0x00, /* reserved, must be zero */
-	0x36, 0x00, 0x00, 0x00, /* offset to start of image data in bytes */
-	0x28, 0x00, 0x00, 0x00, /* size of BITMAP INFO HEADER structure, must be 0x28 */
-};
+//static unsigned char bmphead1[18] = {
+//	0x42, 0x4d, 		/* signature */
+//	0x36, 0x84, 0x03, 0x00, /* size of BMP file in bytes (unreliable) */
+//	0x00, 0x00, 0x00, 0x00, /* reserved, must be zero */
+//	0x36, 0x00, 0x00, 0x00, /* offset to start of image data in bytes */
+//	0x28, 0x00, 0x00, 0x00, /* size of BITMAP INFO HEADER structure, must be 0x28 */
+//};
 
 unsigned char bmpheadW[4];
 unsigned char bmpheadH[4];
 //	0xf0, 0x00, 0x00, 0x00, /* image width in pixels */
 //	0x40, 0x01, 0x00, 0x00, /* image height in pixels */
 
-static unsigned char bmphead2[8] = {
-	0x01, 0x00,		/* number of planes in the image, must be 1 */
-	0x18, 0x00, 		/* number of bits per pixel (1, 4, 8 or 24) */
-	0x00, 0x00, 0x00, 0x00, /* compression type (0=none, 1=RLE-8, 2=RLE-4) */
-};
+//static unsigned char bmphead2[8] = {
+//	0x01, 0x00,		/* number of planes in the image, must be 1 */
+//	0x18, 0x00, 		/* number of bits per pixel (1, 4, 8 or 24) */
+//	0x00, 0x00, 0x00, 0x00, /* compression type (0=none, 1=RLE-8, 2=RLE-4) */
+//};
 
 unsigned char bmpheadS[4];
 //	0x00, 0x84, 0x03, 0x00, /* size of image data in bytes (including padding) 0x38400 for 320x240*/ 
 
-static unsigned char bmphead3[16] = {
-	0x00, 0x00, 0x00, 0x00, /* horizontal resolution in pixels per meter (unreliable) */
-	0x00, 0x00, 0x00, 0x00, /* vertical resolution in pixels per meter (unreliable) */
-	0x00, 0x00, 0x00, 0x00, /* number of colors in image, or zero */
-	0x00, 0x00, 0x00, 0x00  /* number of important colors, or zero */
-};
+//static unsigned char bmphead3[16] = {
+//	0x00, 0x00, 0x00, 0x00, /* horizontal resolution in pixels per meter (unreliable) */
+//	0x00, 0x00, 0x00, 0x00, /* vertical resolution in pixels per meter (unreliable) */
+//	0x00, 0x00, 0x00, 0x00, /* number of colors in image, or zero */
+//	0x00, 0x00, 0x00, 0x00  /* number of important colors, or zero */
+//};
 
 /*static unsigned char smartphonesig[30] = {
 	0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x73, 0x6d,
@@ -159,7 +159,7 @@ static unsigned char htcsig[32] = {
 } */
 
 /* convertBMP - converts a NB splash screen to a bitmap */
-int convertNB2BMP(FILE *input, char *filename, int biWidth, int biHeight, long long dataLen)
+/*int convertNB2BMP(FILE *input, char *filename, int biWidth, int biHeight, long long dataLen)
 {
 	FILE *output;
 	int y,x;
@@ -275,7 +275,7 @@ int convertNB2NBH(char *filename, int SignMaxChunkSize, char *modelid, char *typ
 	memset(signature, 0, sizeof(signature));
 	sscanf(type, "0x%lx", &header.sectiontypes[0]);
 
-	/* calculate offset for first section type */
+	// calculate offset for first section type
 	offset = sizeof(magicHeader) + sizeof(HTCIMAGEHEADER);
 
 	nb = fopen(nbfile, "rb");
@@ -291,14 +291,14 @@ int convertNB2NBH(char *filename, int SignMaxChunkSize, char *modelid, char *typ
 	header.sectionoffsets[0]=offset;
 	header.sectionlengths[0]=sectionlen;
 
-	/* we have the header, now write the DBH file */
+	// we have the header, now write the DBH file
 	dbh = fopen("tempfile.dbh","wb");
 	if (dbh == NULL) {
 		fprintf(stderr, "[!!] Could not open 'tempfile.dbh'\n");
 		exit(1);
 	}
 
-	/* write the DBH header */
+	///write the DBH header
 	fwrite(magicHeader, 1, sizeof(magicHeader), dbh);
 	fwrite(&header, 1, sizeof(HTCIMAGEHEADER), dbh);
 
@@ -318,7 +318,7 @@ int convertNB2NBH(char *filename, int SignMaxChunkSize, char *modelid, char *typ
 	fclose(nb);
 	fclose(dbh);
 
-	/* we have the DBH, now write the NBH */
+	// we have the DBH, now write the NBH
 
 	sprintf(filename2, "%s.nbh", filename);
 	strcpy(filename, filename2);
@@ -361,7 +361,7 @@ int convertNB2NBH(char *filename, int SignMaxChunkSize, char *modelid, char *typ
 	fclose(dbh);
 	unlink("tempfile.dbh");
 
-	/* write the last block */
+	// write the last block
 	blockLen = 0;
 	flag = 2;
 	fwrite(&blockLen, 4, 1, nbh);
@@ -371,7 +371,7 @@ int convertNB2NBH(char *filename, int SignMaxChunkSize, char *modelid, char *typ
 
 	fclose(nbh);
 	return 0;
-}
+}*/
 
 void help_show_message()
 {
